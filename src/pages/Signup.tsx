@@ -50,7 +50,7 @@ export default function Signup() {
     },
     onCompleted: (createUser) => {
       localStorage.setItem('auth', createUser.Signup.token);
-      navigate('/adminpanel');
+      navigate('/card');
     },
     variables: {
       names: names,

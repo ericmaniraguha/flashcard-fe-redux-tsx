@@ -1,5 +1,5 @@
 import AllRoutes from './routes';
-import './styles/login.scss';
+import './pages/styles/login.scss';
 
 function App() {
   return (

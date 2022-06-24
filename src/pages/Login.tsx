@@ -63,7 +63,7 @@ export default function login() {
     },
     onCompleted: (loginUser) => {
       localStorage.setItem('auth', loginUser.login.token);
-      navigate('/adminpanel');
+      navigate('/card');
     },
     variables: {
       password: password,
