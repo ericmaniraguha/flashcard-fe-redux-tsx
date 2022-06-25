@@ -86,17 +86,6 @@ export default function Signup() {
 
   const theme = createTheme();
 
-  /*  export default function Register() {
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-      event.preventDefault();
-      const data = new FormData(event.currentTarget);
-      console.log({
-        Names: data.get('names'),
-        email: data.get('email'),
-        password: data.get('password'),
-      });
-    }; */
-
   return (
     <ThemeProvider theme={theme}>
       <Container component='main' maxWidth='xs'>

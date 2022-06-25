@@ -46,7 +46,7 @@ const CREATE_LOGIN_MUTATION = gql`
 
 const theme = createTheme();
 
-export default function login() {
+export default function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
