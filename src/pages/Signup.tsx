@@ -114,6 +114,7 @@ export default function Signup() {
               name='names'
               autoComplete='names'
               autoFocus
+              size='small'
               type={'text'}
               value={names}
               onChange={onhandChangeNames}
@@ -128,6 +129,7 @@ export default function Signup() {
               name='email'
               autoComplete='email'
               autoFocus
+              size='small'
               type={'email'}
               value={email}
               onChange={onhandChangeEmail}
@@ -140,15 +142,13 @@ export default function Signup() {
               name='password'
               label='Password'
               id='password'
+              size='small'
               autoComplete='current-password'
               type={'password'}
               value={password}
               onChange={handleChangePassword}
             />
-            <FormControlLabel
-              control={<Checkbox value='remember' color='primary' />}
-              label='Remember me'
-            />
+
             <Button
               value={'Signup'}
               type='submit'

@@ -104,6 +104,7 @@ export default function Login() {
               autoComplete='email'
               onChange={onhandChangeEmail}
               autoFocus
+              size='small'
             />
             <TextField
               margin='normal'
@@ -115,15 +116,14 @@ export default function Login() {
               id='password'
               autoComplete='current-password'
               onChange={handleChangePassword}
+              size='small'
             />
-            <FormControlLabel
-              control={<Checkbox value='remember' color='primary' />}
-              label='Remember me'
-            />
+
             <Button
               type='submit'
               fullWidth
               variant='contained'
+              color='success'
               sx={{ mt: 3, mb: 2 }}
             >
               Sign In
