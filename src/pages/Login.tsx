@@ -123,7 +123,6 @@ export default function Login() {
               type='submit'
               fullWidth
               variant='contained'
-              color='success'
               sx={{ mt: 3, mb: 2 }}
             >
               Sign In

@@ -97,8 +97,7 @@ const Sidebar: React.FunctionComponent = () => {
           <FaIcons.FaBars />
         </MenuIconOpen>
       </Navbar>
-
-      <SidebarMenu close={close}>
+      <SidebarMenu close={close} style={{ zIndex: 1, position: 'absolute' }}>
         <MenuIconClose to='#' onClick={showSidebar}>
           <FaIcons.FaTimes />
         </MenuIconClose>
