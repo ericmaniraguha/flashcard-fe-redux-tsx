@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import { useQuery, useMutation, gql } from '@apollo/client';
 import Card from '@mui/material/Card';
@@ -10,9 +9,10 @@ import { CardActionArea } from '@mui/material';
 import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
-const CARDS_QUERY_OUNNER = gql`
+const CARDS_QUERY_OWNER = gql`
   query {
     getCardOwners {
       question
@@ -30,17 +30,9 @@ const DELETE_CARD = gql`
   }
 `;
 
-const DrawerHeader = styled('div')(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'flex-end',
-  padding: theme.spacing(0, 1),
-  ...theme.mixins.toolbar,
-}));
-
 function AdminPanel() {
   const [id, setId] = useState(0);
-  const { data } = useQuery(CARDS_QUERY_OUNNER);
+  const { data } = useQuery(CARDS_QUERY_OWNER);
   const [deleteCardMutation] = useMutation(DELETE_CARD, {
     onCompleted: (deleteCardMutation) => {
       toast.success('Card Successfully created.');
@@ -54,6 +46,8 @@ function AdminPanel() {
     setId(id);
     await deleteCardMutation();
   };
+  const navigate = useNavigate();
+  navigate('/adminpanel');
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -67,10 +61,10 @@ function AdminPanel() {
                 <CardActionArea>
                   <CardContent>
                     <Typography gutterBottom variant='h5' component='div'>
-                      Cards
+                      {card.question}
                     </Typography>
                     <Typography variant='body2' color='text.secondary'>
-                      {card.question}
+                      {card.answer}
                     </Typography>
                   </CardContent>
 

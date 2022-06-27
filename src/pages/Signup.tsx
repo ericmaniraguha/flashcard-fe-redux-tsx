@@ -14,6 +14,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { SiGnuprivacyguard, SiAboutdotme } from 'react-icons/si';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const CREATE_USER = gql`
   mutation Signup($names: String!, $password: String!, $email: String!) {

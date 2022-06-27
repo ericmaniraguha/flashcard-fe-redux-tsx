@@ -12,6 +12,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { AiOutlineLogin } from 'react-icons/ai';
 import { gql, useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
+import CircularProgress from '@mui/material/CircularProgress';
 
 function Copyright(props: any) {
   return (
@@ -120,6 +121,7 @@ export default function Login() {
               variant='contained'
               sx={{ mt: 3, mb: 2 }}
             >
+              <CircularProgress />
               Sign In
             </Button>
             <Grid container>

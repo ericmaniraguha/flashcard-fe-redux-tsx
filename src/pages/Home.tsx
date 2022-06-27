@@ -1,20 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
-import lawimage from '../images/woman-lawyer-svgrepo-com.svg';
 import lawImage from '../images/lawImage.png';
 import { Typography } from '@mui/material/';
-
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-
-const HomeText = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 50px;
-  height: 70vh;
-`;
 
 const Home: React.FunctionComponent = () => {
   return (

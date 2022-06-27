@@ -4,7 +4,6 @@ import * as FaIcons from 'react-icons/fa';
 import { SidebarData } from './SidebarData';
 import styled from 'styled-components';
 import { useState } from 'react';
-import { Typography } from '@mui/material';
 
 const Navbar = styled.div`
   display: flex;
@@ -69,23 +68,6 @@ const MenuItemLinks = styled(Link)`
     margin: 0 2rem;
   }
 `;
-function Copyright(props: any) {
-  return (
-    <Typography
-      variant='body2'
-      color='text.secondary'
-      align='center'
-      {...props}
-    >
-      {'Copyright © '}
-      <Link color='inherit' hrefLang='https://flacardcliminallaw.com/' to={''}>
-        flacardcliminallaw.com
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
 
 const Sidebar: React.FunctionComponent = () => {
   const [close, setClose] = useState(false);
