@@ -33,7 +33,7 @@ const About: React.FunctionComponent = () => {
   return (
     <AboutText>
       <br />
-      <Abouth>Crimial Law.</Abouth>
+      <Abouth>Criminal Law.</Abouth>
 
       <div>
         <AboutPara>
