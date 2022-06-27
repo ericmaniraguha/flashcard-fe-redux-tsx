@@ -2,6 +2,7 @@ import React from 'react';
 import * as FaIcons from 'react-icons/fa';
 import { AiOutlineLogin } from 'react-icons/ai';
 import { SiGnuprivacyguard, SiAboutdotme } from 'react-icons/si';
+import { MdArticle } from 'react-icons/md';
 
 export const SidebarData = [
   {
@@ -10,11 +11,11 @@ export const SidebarData = [
     icon: <FaIcons.FaHome />,
   },
 
-  /*  {
+  {
     title: 'Cards',
-    path: '/card',
+    path: '/cards',
     icon: <MdArticle />,
-  }, */
+  },
 
   {
     title: 'Signup',

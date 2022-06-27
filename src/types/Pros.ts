@@ -9,3 +9,6 @@ export interface Inputprops {
   value: any;
   type: string;
 }
+export interface contentSiber {
+  value: any;
+}

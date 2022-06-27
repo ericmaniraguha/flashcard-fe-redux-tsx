@@ -12,6 +12,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { AiOutlineLogin } from 'react-icons/ai';
 import { gql, useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
+import Inputs from '../components/Input';
 
 function Copyright(props: any) {
   return (
@@ -31,9 +32,9 @@ function Copyright(props: any) {
   );
 }
 
-const CREATE_LOGIN = gql`
-  mutation login($password: String!, $email: String!) {
-    login(email: $email, password: $password) {
+const UPDATE_CARD = gql`
+  mutation updateCard($names: String!, $password: String!, $email: String!) {
+    creatNewCard(question: $question, answer: $answer) {
       token
       user {
         names
@@ -45,31 +46,20 @@ const CREATE_LOGIN = gql`
 
 const theme = createTheme();
 
-export default function Login() {
-  const navigate = useNavigate();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const handleChangePassword = (e: any) => {
-    setPassword(e.target.value);
-  };
-  const onhandChangeEmail = (e: any) => {
-    setEmail(e.target.value);
-  };
+export default function UpdateCard() {
+  const [question, setQuestion] = useState('');
+  const [answer, setAnswer] = useState('');
 
-  const [loginUser] = useMutation(CREATE_LOGIN, {
-    onCompleted: (loginUser) => {
-      localStorage.setItem('userToken', loginUser.login.token);
-      navigate('/adminpanel');
-    },
-    variables: {
-      password: password,
-      email: email,
-    },
-  });
+  const handleChangeAnswer = (e: any) => {
+    setAnswer(e.target.value);
+  };
+  const onhandChangeQuestion = (e: any) => {
+    setQuestion(e.target.value);
+  };
   const onsubmit = async (e: any) => {
     e.preventDefault();
-    loginUser();
   };
+
   return (
     <ThemeProvider theme={theme}>
       <Container component='main' maxWidth='xs'>
@@ -86,51 +76,50 @@ export default function Login() {
             <AiOutlineLogin />
           </Avatar>
           <Typography component='h1' variant='h5'>
-            Sign in
+            Update Card
           </Typography>
           <Box component='form' onSubmit={onsubmit} noValidate sx={{ mt: 1 }}>
-            <TextField
-              margin='normal'
-              required
-              fullWidth
-              id='email'
-              label='Email Address'
-              name='email'
-              autoComplete='email'
-              onChange={onhandChangeEmail}
-              autoFocus
-              size='small'
+            <Inputs
+              label={'question'}
+              sx={{
+                width: 420,
+                height: 50,
+                margin: '20px 0px 0px 16px',
+              }}
+              type={'text'}
+              value={question}
+              onchange={onhandChangeQuestion}
             />
-            <TextField
-              margin='normal'
-              required
-              fullWidth
-              name='password'
-              label='Password'
-              type='password'
-              id='password'
-              autoComplete='current-password'
-              onChange={handleChangePassword}
-              size='small'
+            <Inputs
+              label={'answer'}
+              sx={{
+                width: 420,
+                height: 50,
+                margin: '20px 0px 0px 16px',
+              }}
+              type={'text'}
+              value={answer}
+              onchange={handleChangeAnswer}
             />
 
             <Button
+              value='Update'
               type='submit'
               fullWidth
               variant='contained'
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              Update
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href='#' variant='body2'>
-                  Forgot password?
+                <Link href='/createNewCard' variant='body2'>
+                  Create new Card
                 </Link>
               </Grid>
               <Grid item>
-                <Link href='/signup' variant='body2'>
-                  {"Don't have an account? Sign Up"}
+                <Link href='/deleteCard' variant='body2'>
+                  {'Delete a card'}
                 </Link>
               </Grid>
             </Grid>

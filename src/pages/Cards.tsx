@@ -1,109 +1,88 @@
-import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import { styled } from '@mui/material/styles';
+import Grid from '@mui/material/Grid';
+import { useQuery, gql } from '@apollo/client';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import { CardActionArea } from '@mui/material';
+import ReactCardFlip from 'react-card-flip';
+import CircularProgress from '@mui/material/CircularProgress';
 
-export default function RecipeReviewCard() {
-  const commonStyles = {
-    bgcolor: 'background.paper',
-    border: '0px solid',
-    // width: '5rem',
-    height: '5rem',
-    display: 'flex',
-    justifyContent: 'center',
-    maxWidth: 545,
+const CARDS_QUERY = gql`
+  query {
+    getAllCards {
+      id
+      question
+      answer
+    }
+  }
+`;
+
+const DrawerHeader = styled('div')(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'flex-end',
+  padding: theme.spacing(0, 1),
+  ...theme.mixins.toolbar,
+}));
+
+function RecipeReviewCard() {
+  const [isFlipped, setIsFlipped] = useState(false);
+  const [flippedCard, setFlippedCard] = useState(0);
+  const { data } = useQuery(CARDS_QUERY);
+  const flipCard = (id: number, e: any) => {
+    setIsFlipped(!isFlipped);
+    setFlippedCard(id);
   };
 
   return (
-    <Container>
-      <Card sx={{ maxWidth: 545, mt: 8, ml: 25 }}>
-        <CardContent>
-          <Typography gutterBottom variant='h5' component='div'>
-            Card
+    <>
+      <Box sx={{ display: 'flex' }}>
+        <Grid container spacing={6} sx={{ margin: '80px 0 0 100px' }}>
+          <Typography
+            align='center'
+            color='primary'
+            variant='h3'
+            sx={{ mt: -10, ml: 35 }}
+          >
+            {' '}
+            Display all cards
           </Typography>
-          <Typography variant='body2' color='text.secondary'>
-            Jurisdiction for any claims "arising under" the Constitution,
-            federal law, or United States treaties Jurisdiction for any claims
-            "arising under" the Constitution, federal law, or United States
-            treaties Jurisdiction for any claims "arising under" the
-            Constitution, federal law, or United States treaties Jurisdiction
-            for any claims "arising under" the Constitution, federal law, or
-            United States treaties Jurisdiction for any claims "arising under"
-            the Constitution, federal law, or United States treaties
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button size='small'>Share</Button>
-          <Button size='small'>Learn More</Button>
-        </CardActions>
-      </Card>
+          <Grid container spacing={6} sx={{ margin: '50px 0 0 500px' }}></Grid>
+          {!data ? (
+            <CircularProgress sx={{ margin: 30 }} />
+          ) : (
+            <>
+              {data.getAllCards.map((card: any) => (
+                <Card
+                  onClick={(e) => flipCard(card.id, e)}
+                  sx={{ maxWidth: 345, marginTop: '20px', marginRight: '20px' }}
+                  style={{ backgroundColor: '#8fadcc' }}
+                >
+                  <ReactCardFlip
+                    isFlipped={isFlipped && flippedCard === card.id}
+                  >
+                    <CardContent>
+                      <Typography variant='body2' color='text.secondary'>
+                        {card.question}
+                      </Typography>
+                    </CardContent>
 
-      <Box sx={{ ...commonStyles, ml: 25, mt: 2 }}>
-        <Button
-          variant='contained'
-          size='large'
-          sx={{
-            color: 'black',
-            backgroundColor: 'red',
-            borderColor: 'green',
-            p: 6.2,
-          }}
-        >
-          1
-        </Button>
-        <Button
-          variant='contained'
-          size='large'
-          sx={{
-            color: 'black',
-            backgroundColor: 'green',
-            borderColor: 'green',
-            p: 6.2,
-          }}
-        >
-          2
-        </Button>
-        <Button
-          variant='contained'
-          size='large'
-          sx={{
-            color: 'black',
-            backgroundColor: 'Yellow',
-            borderColor: 'green',
-            p: 6.2,
-          }}
-        >
-          3
-        </Button>
-        <Button
-          variant='contained'
-          size='large'
-          sx={{
-            color: 'black',
-            backgroundColor: 'brown',
-            borderColor: 'green',
-            p: 6.2,
-          }}
-        >
-          4
-        </Button>
-        <Button
-          variant='contained'
-          size='large'
-          sx={{
-            color: 'black',
-            backgroundColor: 'grey',
-            borderColor: 'green',
-            p: 6.2,
-          }}
-        >
-          5
-        </Button>
+                    <CardContent>
+                      <Typography color='primary' variant='h5'>
+                        {card.answer}
+                      </Typography>
+                    </CardContent>
+                  </ReactCardFlip>
+                </Card>
+              ))}
+            </>
+          )}
+        </Grid>
       </Box>
-    </Container>
+    </>
   );
 }
+export default RecipeReviewCard;

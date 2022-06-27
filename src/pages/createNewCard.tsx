@@ -12,6 +12,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { AiOutlineLogin } from 'react-icons/ai';
 import { gql, useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
+import Inputs from '../components/Input';
+import toast, { Toaster } from 'react-hot-toast';
 
 function Copyright(props: any) {
   return (
@@ -31,45 +33,45 @@ function Copyright(props: any) {
   );
 }
 
-const CREATE_LOGIN = gql`
-  mutation login($password: String!, $email: String!) {
-    login(email: $email, password: $password) {
-      token
-      user {
-        names
-        email
-      }
+const CREATE_CARD = gql`
+  mutation SignupMutation($question: String!, $answer: String!) {
+    creatNewCard(question: $question, answer: $answer) {
+      question
+      answer
     }
   }
 `;
 
 const theme = createTheme();
 
-export default function Login() {
-  const navigate = useNavigate();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const handleChangePassword = (e: any) => {
-    setPassword(e.target.value);
-  };
-  const onhandChangeEmail = (e: any) => {
-    setEmail(e.target.value);
-  };
+export default function CreateNewCard() {
+  const [question, setQuestion] = useState('');
+  const [answer, setAnswer] = useState('');
 
-  const [loginUser] = useMutation(CREATE_LOGIN, {
-    onCompleted: (loginUser) => {
-      localStorage.setItem('userToken', loginUser.login.token);
-      navigate('/adminpanel');
+  const handleChangeAnswer = (e: any) => {
+    setAnswer(e.target.value);
+  };
+  const onhandChangeQuestion = (e: any) => {
+    setQuestion(e.target.value);
+  };
+  const [createCard] = useMutation(CREATE_CARD, {
+    onCompleted: (createCard) => {
+      toast.success('Successful to create a card.');
     },
     variables: {
-      password: password,
-      email: email,
+      question: question,
+      answer: answer,
     },
   });
+
   const onsubmit = async (e: any) => {
     e.preventDefault();
-    loginUser();
+    const formName: any = document.getElementById('formname');
+    await createCard();
+    formName.reset();
+    console.log(formName);
   };
+
   return (
     <ThemeProvider theme={theme}>
       <Container component='main' maxWidth='xs'>
@@ -86,51 +88,50 @@ export default function Login() {
             <AiOutlineLogin />
           </Avatar>
           <Typography component='h1' variant='h5'>
-            Sign in
+            Create A card
           </Typography>
           <Box component='form' onSubmit={onsubmit} noValidate sx={{ mt: 1 }}>
-            <TextField
-              margin='normal'
-              required
-              fullWidth
-              id='email'
-              label='Email Address'
-              name='email'
-              autoComplete='email'
-              onChange={onhandChangeEmail}
-              autoFocus
-              size='small'
+            <Inputs
+              label={'question'}
+              sx={{
+                width: 420,
+                height: 50,
+                margin: '20px 0px 0px 16px',
+              }}
+              type={'text'}
+              value={question}
+              onchange={onhandChangeQuestion}
             />
-            <TextField
-              margin='normal'
-              required
-              fullWidth
-              name='password'
-              label='Password'
-              type='password'
-              id='password'
-              autoComplete='current-password'
-              onChange={handleChangePassword}
-              size='small'
+            <Inputs
+              label={'answer'}
+              sx={{
+                width: 420,
+                height: 50,
+                margin: '20px 0px 0px 16px',
+              }}
+              type={'text'}
+              value={answer}
+              onchange={handleChangeAnswer}
             />
 
             <Button
+              value='Create'
               type='submit'
               fullWidth
               variant='contained'
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              Create a card
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href='#' variant='body2'>
-                  Forgot password?
+                <Link href='/updateCard' variant='body2'>
+                  update a Card
                 </Link>
               </Grid>
               <Grid item>
-                <Link href='/signup' variant='body2'>
-                  {"Don't have an account? Sign Up"}
+                <Link href='/deleteCard' variant='body2'>
+                  {'Delete a card'}
                 </Link>
               </Grid>
             </Grid>

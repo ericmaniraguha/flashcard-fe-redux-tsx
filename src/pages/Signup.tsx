@@ -15,12 +15,8 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { SiGnuprivacyguard, SiAboutdotme } from 'react-icons/si';
 
-const CREATE_USER_MUTATION = gql`
-  mutation SignupMutation(
-    $names: String!
-    $password: String!
-    $email: String!
-  ) {
+const CREATE_USER = gql`
+  mutation Signup($names: String!, $password: String!, $email: String!) {
     Signup(email: $email, names: $names, password: $password) {
       token
       user {
@@ -44,13 +40,13 @@ export default function Signup() {
   const onhandChangeEmail = (e: any) => {
     setEmail(e.target.value);
   };
-  const [createUser, { error }] = useMutation(CREATE_USER_MUTATION, {
+  const [createUser, { error }] = useMutation(CREATE_USER, {
     onError: (error) => {
       console.log(error.message);
     },
     onCompleted: (createUser) => {
-      localStorage.setItem('auth', createUser.Signup.token);
-      navigate('/card');
+      localStorage.setItem('userToken', createUser.Signup.token);
+      navigate('/adminpanel');
     },
     variables: {
       names: names,
@@ -61,9 +57,7 @@ export default function Signup() {
 
   const onsubmit = async (e: any) => {
     e.preventDefault();
-    const existingToken = await createUser();
-
-    console.log('token', existingToken);
+    await createUser();
   };
 
   function Copyright(props: any) {
@@ -154,7 +148,6 @@ export default function Signup() {
               type='submit'
               fullWidth
               variant='contained'
-            
               sx={{ mt: 3, mb: 2 }}
             >
               Register
