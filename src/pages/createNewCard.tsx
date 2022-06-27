@@ -34,8 +34,8 @@ function Copyright(props: any) {
 }
 
 const CREATE_CARD = gql`
-  mutation SignupMutation($question: String!, $answer: String!) {
-    creatNewCard(question: $question, answer: $answer) {
+  mutation Signup($question: String!, $answer: String!) {
+    createNewCard(question: $question, answer: $answer) {
       question
       answer
     }
@@ -90,7 +90,13 @@ export default function CreateNewCard() {
           <Typography component='h1' variant='h5'>
             Create A card
           </Typography>
-          <Box component='form' onSubmit={onsubmit} noValidate sx={{ mt: 1 }}>
+          <Box
+            component='form'
+            id='formname'
+            onSubmit={onsubmit}
+            noValidate
+            sx={{ mt: 1 }}
+          >
             <Inputs
               label={'question'}
               sx={{

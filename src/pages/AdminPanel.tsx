@@ -11,7 +11,6 @@ import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
-import SplitButton from './AdminAction';
 
 const CARDS_QUERY_OUNNER = gql`
   query {
@@ -74,7 +73,7 @@ function AdminPanel() {
                       {card.question}
                     </Typography>
                   </CardContent>
-                  <SplitButton />
+
                   <CardActions>
                     <Button
                       size='small'

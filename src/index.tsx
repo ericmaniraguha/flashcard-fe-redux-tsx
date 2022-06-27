@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { GlobalStyle } from './pages/styles/global';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { setContext } from '@apollo/client/link/context';
 import {
   ApolloProvider,
   ApolloClient,
@@ -14,11 +15,20 @@ const httpLink = createHttpLink({
   uri: 'https://flashcard-law-backend-app.herokuapp.com/',
 });
 
-const client = new ApolloClient({
-  link: httpLink,
-  cache: new InMemoryCache(),
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem('userToken');
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  };
 });
 
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache(),
+});
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
