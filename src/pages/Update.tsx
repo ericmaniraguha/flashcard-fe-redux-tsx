@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { AiOutlineLogin } from 'react-icons/ai';
-import { gql, useMutation } from '@apollo/client';
+import { gql } from '@apollo/client';
 import Inputs from '../components/Input';
 
 function Copyright(props: any) {

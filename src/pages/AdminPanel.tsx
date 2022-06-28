@@ -11,6 +11,9 @@ import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import ReactCardFlip from 'react-card-flip';
 import CircularProgress from '@mui/material/CircularProgress';
+import DeleteForeverSharpIcon from '@mui/icons-material/DeleteForeverSharp';
+import BrowserUpdatedOutlinedIcon from '@mui/icons-material/BrowserUpdatedOutlined';
+import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
 
 const USER_OWNER_CARDS = gql`
   query {
@@ -61,6 +64,10 @@ export default function AdminPanel() {
     await deleteCardMutation();
     refetch();
   };
+  const current = new Date();
+  const date = `${current.getDate()}/${
+    current.getMonth() + 1
+  }/${current.getFullYear()}`;
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -78,7 +85,9 @@ export default function AdminPanel() {
             fontFamily='Josefin Sans, sans-serif'
             fontWeight={900}
             color='#00095E'
+            sx={{ ml: 45, mt: -5 }}
           >
+            <AccountBoxOutlinedIcon />
             User's Cards
           </Typography>
         </Grid>
@@ -90,6 +99,7 @@ export default function AdminPanel() {
               <Card
                 onClick={(e) => flipCard(card.id, e)}
                 sx={{ maxWidth: 345, marginTop: '20px', marginRight: '20px' }}
+                style={{ backgroundColor: '#8fadcc' }}
               >
                 <ReactCardFlip isFlipped={isFlipped && flippedCard === card.id}>
                   <CardContent>
@@ -101,13 +111,14 @@ export default function AdminPanel() {
                     </Typography>
 
                     <CardContent>
-                      <CardActions>
+                      <CardActions sx={{ mt: 5, ml: 5 }}>
                         <Button
                           size='small'
                           variant='contained'
                           color='error'
                           onClick={(e) => deleteCard(e, card.id)}
                         >
+                          <DeleteForeverSharpIcon />
                           Delete
                         </Button>
                         <CardActions>
@@ -117,11 +128,19 @@ export default function AdminPanel() {
                             variant='contained'
                             onClick={() => navigationUpdate(card.id)}
                           >
+                            <BrowserUpdatedOutlinedIcon />
                             Update
                           </Button>
                         </CardActions>
                       </CardActions>
                     </CardContent>
+                    <Typography
+                      // variant='body2'
+                      variant='h6'
+                      color='text.secondary'
+                    >
+                      {date}
+                    </Typography>
                   </CardContent>
                   <CardContent>
                     <Typography gutterBottom variant='h5' component='div'>
