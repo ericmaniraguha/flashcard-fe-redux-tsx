@@ -42,7 +42,7 @@ const CREATE_CARD = gql`
 
 const theme = createTheme();
 
-export default function CreateNewCard() {
+export default function CreateACard() {
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
 
@@ -128,14 +128,9 @@ export default function CreateNewCard() {
               Create a card
             </Button>
             <Grid container>
-              <Grid item xs>
-                <Link href='/updateCard' variant='body2'>
-                  update a Card
-                </Link>
-              </Grid>
               <Grid item>
-                <Link href='/deleteCard' variant='body2'>
-                  {'Delete a card'}
+                <Link href='/adminpanel' variant='body2'>
+                  {'Admin-Panel.'}
                 </Link>
               </Grid>
             </Grid>

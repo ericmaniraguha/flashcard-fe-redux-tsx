@@ -8,12 +8,13 @@ import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
 import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import ReactCardFlip from 'react-card-flip';
 import CircularProgress from '@mui/material/CircularProgress';
 import DeleteForeverSharpIcon from '@mui/icons-material/DeleteForeverSharp';
 import BrowserUpdatedOutlinedIcon from '@mui/icons-material/BrowserUpdatedOutlined';
 import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
+import CreateIcon from '@mui/icons-material/Create';
 
 const USER_OWNER_CARDS = gql`
   query {
@@ -26,10 +27,8 @@ const USER_OWNER_CARDS = gql`
 `;
 
 const DELETE_CARD = gql`
-  mutation deleteCard($id: number!) {
-    mutation {
-      deleteCard(id: $id)
-    }
+  mutation ($id: Int!) {
+    deleteCard(id: $id)
   }
 `;
 
@@ -90,6 +89,15 @@ export default function AdminPanel() {
             <AccountBoxOutlinedIcon />
             User's Cards
           </Typography>
+          <Link to='/createNewCard'>
+            <CardActions>
+              {' '}
+              <Button size='small' variant='contained'>
+                <CreateIcon />
+                Create new Card
+              </Button>
+            </CardActions>
+          </Link>
         </Grid>
         {loading ? (
           <CircularProgress sx={{ margin: 30 }} />

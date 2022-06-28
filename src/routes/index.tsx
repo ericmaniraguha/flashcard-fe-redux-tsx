@@ -9,7 +9,7 @@ import About from '../pages/About';
 import Login from '../pages/Login';
 import Register from '../pages/Signup';
 import AdminPanel from '../pages/AdminPanel';
-import CreateNewCard from '../pages/createNewCard';
+import CreateACard from '../pages/createNewCard';
 import UpdateCard from '../pages/Update';
 
 const AllRoutes = () => {
@@ -25,7 +25,7 @@ const AllRoutes = () => {
           <Route path='/adminPanel' element={<AdminPanel />} />
           <Route path='/signup' element={<Register />} />
           <Route path='/cards' element={<RecipeReviewCard />} />
-          <Route path='/createNewCard' element={<CreateNewCard />} />
+          <Route path='/createNewCard' element={<CreateACard />} />
           <Route path='/updateCard' element={<UpdateCard />} />
         </Routes>
       </Router>

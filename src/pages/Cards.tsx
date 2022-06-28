@@ -20,13 +20,6 @@ const DISPLAY_ALL_CARDS = gql`
 `;
 
 function RecipeReviewCard() {
-  /*  const [isFlipped, setIsFlipped] = useState(false);
-  const [flippedCard, setFlippedCard] = useState(0);
-  const { data } = useQuery(CARDS_QUERY);
-  const flipCard = (id: number, e: any) => {
-    setIsFlipped(!isFlipped);
-    setFlippedCard(id);
-  }; */
   const [isFlipped, setIsFlipped] = useState(false);
   const [flippedCard, setFlippedCard] = useState(0);
 
@@ -57,7 +50,7 @@ function RecipeReviewCard() {
             fontFamily='Josefin Sans, sans-serif'
             fontWeight={900}
             color='#00095E'
-            sx={{ ml: 45, mt: -5 }}
+            sx={{ ml: 20, mt: -5, lg: 30, md: 20, sm: 15, xs: 10 }}
           >
             <AssignmentRoundedIcon />
             Display All Cards
@@ -85,9 +78,7 @@ function RecipeReviewCard() {
                       // variant='body2'
                       variant='h6'
                       color='text.secondary'
-                    >
-                      {date}
-                    </Typography>
+                    ></Typography>
                   </CardContent>
                   <CardContent>
                     <Typography gutterBottom variant='h5' component='div'>
