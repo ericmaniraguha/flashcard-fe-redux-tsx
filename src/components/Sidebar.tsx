@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import * as FaIcons from 'react-icons/fa';
 import { SidebarData } from './SidebarData';
 import styled from 'styled-components';
@@ -101,6 +101,17 @@ theme.typography.h6 = {
 const Sidebar: React.FunctionComponent = () => {
   const [close, setClose] = useState(false);
   const showSidebar = () => setClose(!close);
+
+  const navigate = useNavigate();
+  // const token = localStorage.getItem('userToken');
+  // if (!token) {
+  //   navigate('/login');
+  // }
+  const logout = () => {
+    window.localStorage.removeItem('userToken');
+    navigate('/');
+  };
+
   return (
     <>
       <Navbar>
@@ -126,7 +137,7 @@ const Sidebar: React.FunctionComponent = () => {
         })}
       </SidebarMenu>
       <ThemeProvider theme={theme}>
-        <Typography variant='h6' style={{ marginLeft: 50 }}>
+        <Typography variant='h6' style={{ marginLeft: 50 }} onClick={logout}>
           <LogoutIcon />
           Logout
         </Typography>
