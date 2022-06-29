@@ -8,10 +8,10 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { AiOutlineLogin } from 'react-icons/ai';
 import { gql, useMutation } from '@apollo/client';
-import Inputs from '../components/Input';
-import toast from 'react-hot-toast';
+import { TextareaAutosize } from '@mui/material';
+import AddCardIcon from '@mui/icons-material/AddCard';
+import toast, { Toaster } from 'react-hot-toast';
 
 function Copyright(props: any) {
   return (
@@ -54,7 +54,11 @@ export default function CreateACard() {
   };
   const [createCard] = useMutation(CREATE_CARD, {
     onCompleted: (createCard) => {
-      toast.success('Successful to create a card.');
+      if (question === '' || answer === '') {
+        toast.error('Empty field is not required.');
+      } else {
+        toast.success('Successful to create a card.');
+      }
     },
     variables: {
       question: question,
@@ -72,6 +76,7 @@ export default function CreateACard() {
 
   return (
     <ThemeProvider theme={theme}>
+      <Toaster />
       <Container component='main' maxWidth='xs'>
         <CssBaseline />
         <Box
@@ -83,7 +88,7 @@ export default function CreateACard() {
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <AiOutlineLogin />
+            <AddCardIcon />
           </Avatar>
           <Typography component='h1' variant='h5'>
             Create A card
@@ -95,7 +100,7 @@ export default function CreateACard() {
             noValidate
             sx={{ mt: 1 }}
           >
-            <Inputs
+            {/* <Inputs
               label={'question'}
               sx={{
                 width: 420,
@@ -116,6 +121,25 @@ export default function CreateACard() {
               type={'text'}
               value={answer}
               onchange={handleChangeAnswer}
+            /> */}
+            <TextareaAutosize
+              aria-label='minimum height'
+              minRows={3}
+              text-align='center'
+              color=' blue'
+              placeholder='Question'
+              style={{ width: 420, height: 80 }}
+              value={question}
+              onChange={onhandChangeQuestion}
+            />
+
+            <TextareaAutosize
+              aria-label='minimum height'
+              minRows={3}
+              placeholder='Answer'
+              style={{ width: 420, height: 150 }}
+              value={answer}
+              onChange={handleChangeAnswer}
             />
 
             <Button

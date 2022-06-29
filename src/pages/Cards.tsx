@@ -8,6 +8,8 @@ import CardContent from '@mui/material/CardContent';
 import ReactCardFlip from 'react-card-flip';
 import CircularProgress from '@mui/material/CircularProgress';
 import AssignmentRoundedIcon from '@mui/icons-material/AssignmentRounded';
+import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
+import QuestionAnswerTwoToneIcon from '@mui/icons-material/QuestionAnswerTwoTone';
 
 const DISPLAY_ALL_CARDS = gql`
   query {
@@ -68,20 +70,25 @@ function RecipeReviewCard() {
               >
                 <ReactCardFlip isFlipped={isFlipped && flippedCard === card.id}>
                   <CardContent>
-                    <Typography gutterBottom variant='h5' component='div'>
-                      Question
+                    <Typography
+                      gutterBottom
+                      variant='h5'
+                      component='div'
+                      color='#00095E'
+                    >
+                      <QuestionAnswerIcon />
                     </Typography>
                     <Typography variant='body2' color='text.secondary'>
                       {card.question}
                     </Typography>
                     <Typography
-                      // variant='body2'
                       variant='h6'
                       color='text.secondary'
                     ></Typography>
                   </CardContent>
                   <CardContent>
-                    <Typography gutterBottom variant='h5' component='div'>
+                    <Typography gutterBottom variant='h6' component='div'>
+                      <QuestionAnswerTwoToneIcon />
                       Answer
                     </Typography>
                     <Typography variant='body2' color='text.secondary'>

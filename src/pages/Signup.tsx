@@ -10,6 +10,7 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import toast, { Toaster } from 'react-hot-toast';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { SiGnuprivacyguard, SiAboutdotme } from 'react-icons/si';
 
@@ -38,9 +39,9 @@ export default function Signup() {
   const onhandChangeEmail = (e: any) => {
     setEmail(e.target.value);
   };
-  const [createUser, { error }] = useMutation(CREATE_USER, {
+  const [createUser] = useMutation(CREATE_USER, {
     onError: (error) => {
-      console.log(error.message);
+      toast.error('Please, add valid credentials!');
     },
     onCompleted: (createUser) => {
       localStorage.setItem('userToken', createUser.Signup.token);
@@ -52,10 +53,18 @@ export default function Signup() {
       email: email,
     },
   });
-
   const onsubmit = async (e: any) => {
     e.preventDefault();
-    await createUser();
+
+    if (names === '') {
+      toast.error('Please, Names are require.');
+    } else if (password === '') {
+      toast.error('Please, Password is required.');
+    } else if (email === '') {
+      toast.error('Please, Password is required.');
+    } else {
+      await createUser();
+    }
   };
 
   function Copyright(props: any) {
@@ -66,6 +75,7 @@ export default function Signup() {
         align='center'
         {...props}
       >
+        <Toaster />
         {'Copyright © '}
         <Link color='inherit' href='https://flashcardcriminallaw.com/'>
           flashcardcriminallaw.com

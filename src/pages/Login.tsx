@@ -12,6 +12,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { AiOutlineLogin } from 'react-icons/ai';
 import { gql, useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
+import toast, { Toaster } from 'react-hot-toast';
 
 function Copyright(props: any) {
   return (
@@ -68,10 +69,18 @@ export default function Login() {
   });
   const onsubmit = async (e: any) => {
     e.preventDefault();
-    loginUser();
+    if (email === '') {
+      toast.error('Please, email and password must be valid.');
+    } else if (password === '') {
+      toast.error('Please, email and password must be valid.');
+    } else {
+      await loginUser();
+    }
   };
+
   return (
     <ThemeProvider theme={theme}>
+      <Toaster />
       <Container component='main' maxWidth='xs'>
         <CssBaseline />
         <Box
@@ -94,6 +103,7 @@ export default function Login() {
               required
               fullWidth
               id='email'
+              type={'email'}
               label='Email Address'
               name='email'
               autoComplete='email'

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
@@ -15,6 +15,8 @@ import DeleteForeverSharpIcon from '@mui/icons-material/DeleteForeverSharp';
 import BrowserUpdatedOutlinedIcon from '@mui/icons-material/BrowserUpdatedOutlined';
 import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
 import CreateIcon from '@mui/icons-material/Create';
+import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
+import QuestionAnswerTwoToneIcon from '@mui/icons-material/QuestionAnswerTwoTone';
 
 const USER_OWNER_CARDS = gql`
   query {
@@ -63,10 +65,10 @@ export default function AdminPanel() {
     await deleteCardMutation();
     refetch();
   };
-  const current = new Date();
-  const date = `${current.getDate()}/${
-    current.getMonth() + 1
-  }/${current.getFullYear()}`;
+
+  useEffect(() => {
+    refetch();
+  }, []);
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -111,8 +113,13 @@ export default function AdminPanel() {
               >
                 <ReactCardFlip isFlipped={isFlipped && flippedCard === card.id}>
                   <CardContent>
-                    <Typography gutterBottom variant='h5' component='div'>
-                      Question
+                    <Typography
+                      gutterBottom
+                      variant='h5'
+                      component='div'
+                      color='#00095E'
+                    >
+                      <QuestionAnswerIcon />
                     </Typography>
                     <Typography variant='body2' color='text.secondary'>
                       {card.question}
@@ -142,16 +149,10 @@ export default function AdminPanel() {
                         </CardActions>
                       </CardActions>
                     </CardContent>
-                    <Typography
-                      // variant='body2'
-                      variant='h6'
-                      color='text.secondary'
-                    >
-                      {date}
-                    </Typography>
                   </CardContent>
                   <CardContent>
-                    <Typography gutterBottom variant='h5' component='div'>
+                    <Typography gutterBottom variant='h6' component='div'>
+                      <QuestionAnswerTwoToneIcon />
                       Answer
                     </Typography>
                     <Typography variant='body2' color='text.secondary'>
