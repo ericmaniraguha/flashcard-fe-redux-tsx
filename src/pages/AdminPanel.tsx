@@ -17,10 +17,11 @@ import BrowserUpdatedOutlinedIcon from '@mui/icons-material/BrowserUpdatedOutlin
 import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import QuestionAnswerTwoToneIcon from '@mui/icons-material/QuestionAnswerTwoTone';
+import { MenuItem, TextField } from '@mui/material';
 
 const USER_OWNER_CARDS = gql`
-  query {
-    getOwnersCard {
+  query ($orderBy: Sort) {
+    getOwnersCard(orderBy: $orderBy) {
       question
       answer
       id
@@ -40,7 +41,13 @@ export default function AdminPanel() {
   const [flippedCard, setFlippedCard] = useState(0);
   const navigate = useNavigate();
   const [id, setId] = useState(0);
-  const { refetch, loading, data } = useQuery(USER_OWNER_CARDS);
+  const [orderBy, setOrderBy] = useState();
+
+  const { refetch, loading, data } = useQuery(USER_OWNER_CARDS, {
+    variables: {
+      orderBy: orderBy,
+    },
+  });
 
   const [deleteCardMutation] = useMutation(DELETE_CARD, {
     onCompleted: () => {
@@ -95,6 +102,30 @@ export default function AdminPanel() {
             <AccountBoxOutlinedIcon />
             User's Cards
           </Typography>
+          <Grid
+            container
+            spacing={5}
+            sx={{ margin: '10px 0 0 0' }}
+            textAlign='center'
+          >
+            <TextField
+              onChange={(e: any) => setOrderBy(e.target.value)}
+              value={orderBy}
+              label='sort'
+              select
+              variant='outlined'
+              sx={{ width: '200px' }}
+            >
+              {[
+                { value: 'asc', label: 'asc' },
+                { value: 'desc', label: 'desc' },
+              ].map((option) => (
+                <MenuItem key={option.label} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
+          </Grid>
         </Grid>
         {loading ? (
           <CircularProgress sx={{ margin: 30 }} />
