@@ -1,10 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
-import Sidebar from '../components/Sidebar';
-
 import Home from '../pages/Home';
-import RecipeReviewCard from '../pages/Cards';
+import DisplayAllCards from '../pages/Cards';
 import About from '../pages/About';
 import Login from '../pages/Login';
 import Register from '../pages/Signup';
@@ -16,15 +13,13 @@ const AllRoutes = () => {
   return (
     <>
       <Router>
-        <Sidebar />
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/card' element={<RecipeReviewCard />} />
           <Route path='/about' element={<About />} />
           <Route path='/login' element={<Login />} />
           <Route path='/adminPanel' element={<AdminPanel />} />
           <Route path='/signup' element={<Register />} />
-          <Route path='/cards' element={<RecipeReviewCard />} />
+          <Route path='/displayallcards' element={<DisplayAllCards />} />
           <Route path='/createNewCard' element={<CreateACard />} />
           <Route path='/updateCard' element={<UpdateCard />} />
         </Routes>

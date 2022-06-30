@@ -10,6 +10,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import AssignmentRoundedIcon from '@mui/icons-material/AssignmentRounded';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import QuestionAnswerTwoToneIcon from '@mui/icons-material/QuestionAnswerTwoTone';
+import HeadSidebar from '../components/SidebarResp';
 
 const DISPLAY_ALL_CARDS = gql`
   query {
@@ -21,7 +22,7 @@ const DISPLAY_ALL_CARDS = gql`
   }
 `;
 
-function RecipeReviewCard() {
+function DisplayAllCards() {
   const [isFlipped, setIsFlipped] = useState(false);
   const [flippedCard, setFlippedCard] = useState(0);
 
@@ -38,7 +39,8 @@ function RecipeReviewCard() {
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <Grid container spacing={5} sx={{ margin: '80px 0 0 100px' }}>
+      <HeadSidebar />
+      <Grid container spacing={5} sx={{ margin: '100px 0 0 100px' }}>
         <Grid
           container
           spacing={5}
@@ -104,4 +106,4 @@ function RecipeReviewCard() {
     </Box>
   );
 }
-export default RecipeReviewCard;
+export default DisplayAllCards;

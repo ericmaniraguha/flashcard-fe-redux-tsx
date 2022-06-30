@@ -12,6 +12,7 @@ import { gql, useMutation } from '@apollo/client';
 import { TextareaAutosize } from '@mui/material';
 import AddCardIcon from '@mui/icons-material/AddCard';
 import toast, { Toaster } from 'react-hot-toast';
+import Sidebar from '../components/Sidebar';
 
 function Copyright(props: any) {
   return (
@@ -76,6 +77,8 @@ export default function CreateACard() {
 
   return (
     <ThemeProvider theme={theme}>
+      <Sidebar />
+
       <Toaster />
       <Container component='main' maxWidth='xs'>
         <CssBaseline />
@@ -90,9 +93,7 @@ export default function CreateACard() {
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <AddCardIcon />
           </Avatar>
-          <Typography component='h1' variant='h5'>
-            Create A card
-          </Typography>
+
           <Box
             component='form'
             id='formname'
@@ -100,28 +101,6 @@ export default function CreateACard() {
             noValidate
             sx={{ mt: 1 }}
           >
-            {/* <Inputs
-              label={'question'}
-              sx={{
-                width: 420,
-                height: 50,
-                margin: '20px 0px 0px 16px',
-              }}
-              type={'text'}
-              value={question}
-              onchange={onhandChangeQuestion}
-            />
-            <Inputs
-              label={'answer'}
-              sx={{
-                width: 420,
-                height: 50,
-                margin: '20px 0px 0px 16px',
-              }}
-              type={'text'}
-              value={answer}
-              onchange={handleChangeAnswer}
-            /> */}
             <TextareaAutosize
               aria-label='minimum height'
               minRows={3}

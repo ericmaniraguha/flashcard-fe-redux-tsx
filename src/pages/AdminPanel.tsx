@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import { useNavigate, Link } from 'react-router-dom';
+import ReactCardFlip from 'react-card-flip';
+import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import toast, { Toaster } from 'react-hot-toast';
+import Sidebar from '../components/Sidebar';
 import { useQuery, useMutation, gql } from '@apollo/client';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
-import Button from '@mui/material/Button';
-import toast from 'react-hot-toast';
-import { useNavigate, Link } from 'react-router-dom';
-import ReactCardFlip from 'react-card-flip';
 import CircularProgress from '@mui/material/CircularProgress';
 import DeleteForeverSharpIcon from '@mui/icons-material/DeleteForeverSharp';
 import BrowserUpdatedOutlinedIcon from '@mui/icons-material/BrowserUpdatedOutlined';
 import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
-import CreateIcon from '@mui/icons-material/Create';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import QuestionAnswerTwoToneIcon from '@mui/icons-material/QuestionAnswerTwoTone';
 
@@ -33,6 +33,7 @@ const DELETE_CARD = gql`
     deleteCard(id: $id)
   }
 `;
+const theme = createTheme();
 
 export default function AdminPanel() {
   const [isFlipped, setIsFlipped] = useState(false);
@@ -71,7 +72,10 @@ export default function AdminPanel() {
   }, []);
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <ThemeProvider theme={theme}>
+      <Sidebar />
+
+      <Toaster />
       <Grid container spacing={5} sx={{ margin: '80px 0 0 100px' }}>
         <Grid
           container
@@ -91,15 +95,6 @@ export default function AdminPanel() {
             <AccountBoxOutlinedIcon />
             User's Cards
           </Typography>
-          <Link to='/createNewCard'>
-            <CardActions>
-              {' '}
-              <Button size='small' variant='contained'>
-                <CreateIcon />
-                Create new Card
-              </Button>
-            </CardActions>
-          </Link>
         </Grid>
         {loading ? (
           <CircularProgress sx={{ margin: 30 }} />
@@ -165,6 +160,6 @@ export default function AdminPanel() {
           </>
         )}
       </Grid>
-    </Box>
+    </ThemeProvider>
   );
 }

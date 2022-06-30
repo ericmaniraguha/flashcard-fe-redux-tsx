@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import HeadSidebar from '../components/SidebarResp';
 
 const AboutText = styled.div`
   display: flex;
@@ -15,7 +16,7 @@ const Abouth = styled.h4`
   font-size: 30px;
   height: 20vh;
 
-  margin-top: -30vh;
+  margin-top: -20vh;
   width: 105vh;
 `;
 
@@ -32,6 +33,7 @@ const AboutPara = styled.p`
 const About: React.FunctionComponent = () => {
   return (
     <AboutText>
+      <HeadSidebar />
       <br />
       <Abouth>Criminal Law.</Abouth>
 

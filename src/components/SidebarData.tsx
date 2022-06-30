@@ -1,8 +1,7 @@
-import React from 'react';
 import * as FaIcons from 'react-icons/fa';
-import { AiOutlineLogin } from 'react-icons/ai';
-import { SiGnuprivacyguard, SiAboutdotme } from 'react-icons/si';
 import { MdArticle } from 'react-icons/md';
+import LogoutIcon from '@mui/icons-material/Logout';
+import InfoIcon from '@mui/icons-material/Info';
 
 export const SidebarData = [
   {
@@ -10,26 +9,25 @@ export const SidebarData = [
     path: '/',
     icon: <FaIcons.FaHome />,
   },
-
   {
-    title: 'Cards',
-    path: '/cards',
+    title: 'Create Card',
+    path: '/createNewCard',
+    icon: <FaIcons.FaHome />,
+  },
+  {
+    title: 'My Cards',
+    path: '/adminPanel',
+    icon: <MdArticle />,
+  },
+  {
+    title: 'All Cards',
+    path: '/displayallcards',
     icon: <MdArticle />,
   },
 
   {
-    title: 'Signup',
-    path: '/signup',
-    icon: <SiGnuprivacyguard />,
-  },
-  {
-    title: 'Login',
-    path: '/login',
-    icon: <AiOutlineLogin />,
-  },
-  {
     title: 'About',
     path: '/about',
-    icon: <SiAboutdotme />,
+    icon: <InfoIcon />,
   },
 ];

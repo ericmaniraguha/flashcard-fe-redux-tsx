@@ -31,6 +31,13 @@ const MenuIconOpen = styled(Link)`
   margin-left: 2rem;
   color: #ffffff;
 `;
+const MenuIconlogout = styled(Link)`
+  display: flex;
+  justify-content: start;
+  font-size: 1.5rem;
+  margin-left: 65rem;
+  color: #ffffff;
+`;
 
 const MenuIconClose = styled(Link)`
   display: flex;
@@ -103,10 +110,8 @@ const Sidebar: React.FunctionComponent = () => {
   const showSidebar = () => setClose(!close);
 
   const navigate = useNavigate();
-  // const token = localStorage.getItem('userToken');
-  // if (!token) {
-  //   navigate('/login');
-  // }
+  const token = localStorage.getItem('userToken');
+
   const logout = () => {
     window.localStorage.removeItem('userToken');
     navigate('/');
@@ -118,6 +123,10 @@ const Sidebar: React.FunctionComponent = () => {
         <MenuIconOpen to='#' onClick={showSidebar}>
           <FaIcons.FaBars />
         </MenuIconOpen>
+        <MenuIconlogout to='/' onClick={logout}>
+          <LogoutIcon />
+          <Typography>Logout</Typography>
+        </MenuIconlogout>
       </Navbar>
 
       <SidebarMenu close={close} style={{ zIndex: 1, position: 'absolute' }}>
@@ -136,12 +145,6 @@ const Sidebar: React.FunctionComponent = () => {
           );
         })}
       </SidebarMenu>
-      <ThemeProvider theme={theme}>
-        <Typography variant='h6' style={{ marginLeft: 50 }} onClick={logout}>
-          <LogoutIcon />
-          Logout
-        </Typography>
-      </ThemeProvider>
     </>
   );
 };
