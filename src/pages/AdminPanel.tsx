@@ -20,7 +20,7 @@ import QuestionAnswerTwoToneIcon from '@mui/icons-material/QuestionAnswerTwoTone
 
 const USER_OWNER_CARDS = gql`
   query {
-    getCardOwners {
+    getOwnersCard {
       question
       answer
       id
@@ -100,7 +100,7 @@ export default function AdminPanel() {
           <CircularProgress sx={{ margin: 30 }} />
         ) : (
           <>
-            {data.getCardOwners.map((card: any) => (
+            {data.getOwnersCard.map((card: any) => (
               <Card
                 onClick={(e) => flipCard(card.id, e)}
                 sx={{ maxWidth: 345, marginTop: '20px', marginRight: '20px' }}
