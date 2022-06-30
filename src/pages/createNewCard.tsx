@@ -13,6 +13,7 @@ import { TextareaAutosize } from '@mui/material';
 import AddCardIcon from '@mui/icons-material/AddCard';
 import toast, { Toaster } from 'react-hot-toast';
 import Sidebar from '../components/Sidebar';
+import { useNavigate } from 'react-router-dom';
 
 function Copyright(props: any) {
   return (
@@ -44,6 +45,7 @@ const CREATE_CARD = gql`
 const theme = createTheme();
 
 export default function CreateACard() {
+  const navigate = useNavigate();
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
 
@@ -59,6 +61,7 @@ export default function CreateACard() {
         toast.error('Empty field is not required.');
       } else {
         toast.success('Successful to create a card.');
+        navigate('/adminpanel');
       }
     },
     variables: {

@@ -21,7 +21,7 @@ const AllRoutes = () => {
           <Route path='/signup' element={<Register />} />
           <Route path='/displayallcards' element={<DisplayAllCards />} />
           <Route path='/createNewCard' element={<CreateACard />} />
-          <Route path='/updateCard' element={<UpdateCard />} />
+          <Route path='/updateCard/:id' element={<UpdateCard />} />
         </Routes>
       </Router>
     </>
