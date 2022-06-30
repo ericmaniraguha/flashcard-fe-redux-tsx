@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
+
 import CssBaseline from '@mui/material/CssBaseline';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
@@ -16,6 +16,7 @@ import Sidebar from '../components/Sidebar';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
+import Buttons from '../components/Button';
 
 function Copyright(props: any) {
   return (
@@ -57,12 +58,13 @@ const theme = createTheme();
 
 export default function UpdateCard() {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
   const { id } = useParams();
   const paramsId: any = id;
   const Id = parseInt(paramsId);
-  const { refetch, loading, data } = useQuery(GET_ONE_CARD, {
+  const { data } = useQuery(GET_ONE_CARD, {
     variables: { id: Id },
     onCompleted: (data) => {
       setQuestion(data.getOneCard.question);
@@ -93,6 +95,18 @@ export default function UpdateCard() {
   });
   const onsubmit = async (e: any) => {
     e.preventDefault();
+    if (question === '') {
+      toast.error('Empty field is not required.');
+    } else if (answer === '') {
+      toast.error('Empty field is not required.');
+    } else {
+      if (!loading) {
+        setLoading(true);
+        if (await UpdateCard()) {
+          setLoading(false);
+        }
+      }
+    }
     await UpdateCard();
   };
   return (
@@ -141,16 +155,31 @@ export default function UpdateCard() {
                 value={answer}
                 onChange={handleChangeAnswer}
               />
+              <Buttons
+                value={'Signup'}
+                loading={loading}
+                sx={{
+                  mt: 3,
+                  mb: 2,
+                  width: {
+                    xs: 280,
+                    sm: 430,
+                  },
+                  height: 50,
+                  margin: {
+                    xs: '2px 5px',
+                    sm: '20px 10px',
+                  },
+                  backgroundColor: '#000080',
+                  fontSize: '18px',
+                  color: 'white',
+                  textTransform: 'none',
+                  '&:hover': {
+                    backgroundColor: '#000080',
+                  },
+                }}
+              />
 
-              <Button
-                value='Create'
-                type='submit'
-                fullWidth
-                variant='contained'
-                sx={{ mt: 3, mb: 2 }}
-              >
-                Update Card
-              </Button>
               <Grid container>
                 <Grid item>
                   <Link href='/adminpanel' variant='body2'>

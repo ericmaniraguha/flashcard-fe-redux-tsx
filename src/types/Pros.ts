@@ -1,6 +1,7 @@
 export interface Buttonprops {
-  sx: any;
+  sx?: any;
   value: string;
+  loading?: boolean;
 }
 export interface Inputprops {
   sx: any;
@@ -8,6 +9,9 @@ export interface Inputprops {
   onchange: any;
   value: any;
   type: string;
+  default?: any;
+  name?: string;
+  defaultValue?: string;
 }
 export interface contentSiber {
   value: any;

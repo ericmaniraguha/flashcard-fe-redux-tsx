@@ -1,14 +1,13 @@
 import * as FaIcons from 'react-icons/fa';
 import { MdArticle } from 'react-icons/md';
-import LogoutIcon from '@mui/icons-material/Logout';
 import InfoIcon from '@mui/icons-material/Info';
 
 export const SidebarData = [
-  {
-    title: 'Home',
-    path: '/',
-    icon: <FaIcons.FaHome />,
-  },
+  // {
+  //   title: 'Home',
+  //   path: '/',
+  //   icon: <FaIcons.FaHome />,
+  // },
   {
     title: 'Create Card',
     path: '/createNewCard',

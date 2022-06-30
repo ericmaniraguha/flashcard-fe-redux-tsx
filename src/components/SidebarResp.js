@@ -34,16 +34,22 @@ export default function DrawerAppBar(props: Props) {
   return (
     <Box sx={{ display: 'flex' }}>
       <AppBar component='nav' sx={{ backgroundColor: '#000080' }}>
-        <Toolbar sx={{ ml: 110 }}>
+        <Toolbar sx={{ ml: 90 }}>
           <Box
-            sx={{
-              display: {
-                xs: 'none',
-                sm: 'block',
-                ml: '150',
+            sx={
+              ({
+                display: {
+                  xs: 'none',
+                  sm: 'block',
+                  ml: '150',
+                },
               },
-            }}
+              { typography: 'body1' })
+            }
           >
+            <Link style={{ color: 'black', textDecoration: 'none' }} to='/'>
+              <Button sx={{ color: '#fff' }}>Home</Button>
+            </Link>
             <Link
               style={{ color: 'black', textDecoration: 'none' }}
               to='/about'

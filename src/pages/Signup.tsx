@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useMutation, gql } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
+
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
@@ -12,7 +12,8 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import toast, { Toaster } from 'react-hot-toast';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { SiGnuprivacyguard, SiAboutdotme } from 'react-icons/si';
+import { SiGnuprivacyguard } from 'react-icons/si';
+import Buttons from '../components/Button';
 
 const CREATE_USER = gql`
   mutation Signup($names: String!, $password: String!, $email: String!) {
@@ -27,6 +28,7 @@ const CREATE_USER = gql`
 
 export default function Signup() {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [names, setNames] = useState('');
@@ -57,13 +59,18 @@ export default function Signup() {
     e.preventDefault();
 
     if (names === '') {
-      toast.error('Please, Names are require.');
+      toast.error('full name is required');
     } else if (password === '') {
-      toast.error('Please, Password is required.');
+      toast.error('password is required');
     } else if (email === '') {
-      toast.error('Please, Password is required.');
+      toast.error('password is required');
     } else {
-      await createUser();
+      if (!loading) {
+        setLoading(true);
+        if (await createUser()) {
+          setLoading(false);
+        }
+      }
     }
   };
 
@@ -152,15 +159,30 @@ export default function Signup() {
               onChange={handleChangePassword}
             />
 
-            <Button
+            <Buttons
               value={'Signup'}
-              type='submit'
-              fullWidth
-              variant='contained'
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Register
-            </Button>
+              loading={loading}
+              sx={{
+                mt: 3,
+                mb: 2,
+                width: {
+                  xs: 280,
+                  sm: 430,
+                },
+                height: 50,
+                margin: {
+                  xs: '2px 5px',
+                  sm: '20px 10px',
+                },
+                backgroundColor: '#000080',
+                fontSize: '18px',
+                color: 'white',
+                textTransform: 'none',
+                '&:hover': {
+                  backgroundColor: '#000080',
+                },
+              }}
+            />
             <Grid container>
               <Grid item>
                 <Link href='/login' variant='body2'>
